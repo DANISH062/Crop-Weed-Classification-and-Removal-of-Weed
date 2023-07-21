@@ -1,0 +1,275 @@
+def FORWARD():
+
+
+    import RPi.GPIO as GPIO
+
+
+
+    import time
+
+
+    # We are going to use the BCM not BOARD layout
+    # https://i.stack.imgur.com/yHddo.png - BCM are the "GPIO#" ones not the ordered pins
+    GPIO.setmode(GPIO.BCM)  
+    GPIO.setwarnings(False)
+
+    #MOTOR 1
+
+    mL_RPWM = 27;  # GPIO pin 19 to the RPWM on the BTS7960
+    mL_LPWM = 18;  # GPIO pin 26 to the LPWM on the BTS7960
+
+    #MOTOR2
+
+    mR_RPWM = 19;  # GPIO pin 19 to the RPWM on the BTS7960
+    mR_LPWM = 13;  # GPIO pin 26 to the LPWM on the BTS7960
+
+
+    # For enabling "Left" and "Right" movement MOTOR 1
+    mL_L_EN = 25;  # connect GPIO pin 20 to L_EN on the BTS7960
+    mL_R_EN = 12;  # connect GPIO pin 21 to R_EN on the BTS7960
+
+    # For enabling "Left" and "Right" movement MOTOR 2
+    mR_L_EN = 23;  # connect GPIO pin 20 to L_EN on the BTS7960
+    mR_R_EN = 24;  # connect GPIO pin 21 to R_EN on the BTS7960
+
+
+    # Set all of our PINS to output MOTOR1
+    GPIO.setup(mL_RPWM, GPIO.OUT)
+    GPIO.setup(mL_LPWM, GPIO.OUT)
+    GPIO.setup(mL_L_EN, GPIO.OUT)
+    GPIO.setup(mL_R_EN, GPIO.OUT)
+
+
+    # Enable "Left" and "Right" movement on the HBRidge MOTOR 1
+    GPIO.output(mL_R_EN, True)
+    GPIO.output(mL_L_EN, True)
+
+
+    mL_rpwm= GPIO.PWM(mL_RPWM, 100)
+    mL_lpwm= GPIO.PWM(mL_LPWM, 100)
+
+    # Set all of our PINS to output MOTOR2
+    GPIO.setup(mR_RPWM, GPIO.OUT)
+    GPIO.setup(mR_LPWM, GPIO.OUT)
+    GPIO.setup(mR_L_EN, GPIO.OUT)
+    GPIO.setup(mR_R_EN, GPIO.OUT)
+
+
+    # Enable "Left" and "Right" movement on the HBRidge MOTRO2
+    GPIO.output(mR_R_EN, True)
+    GPIO.output(mR_L_EN, True)
+
+
+    mR_rpwm= GPIO.PWM(mR_RPWM, 100)
+    mR_lpwm= GPIO.PWM(mR_LPWM, 100)
+
+    mR_rpwm.ChangeDutyCycle(50)
+    mL_rpwm.ChangeDutyCycle(50)
+
+    mL_rpwm.start(50)
+    mR_rpwm.start(50)
+
+
+
+
+
+
+
+def STOP():
+
+    import RPi.GPIO as GPIO
+
+
+
+    import time
+
+
+    # We are going to use the BCM not BOARD layout
+    # https://i.stack.imgur.com/yHddo.png - BCM are the "GPIO#" ones not the ordered pins
+    GPIO.setmode(GPIO.BCM)  
+    GPIO.setwarnings(False)
+
+    #MOTOR 1
+
+    mL_RPWM = 27;  # GPIO pin 19 to the RPWM on the BTS7960
+    mL_LPWM = 18;  # GPIO pin 26 to the LPWM on the BTS7960
+
+    #MOTOR2
+
+    mR_RPWM = 19;  # GPIO pin 19 to the RPWM on the BTS7960
+    mR_LPWM = 13;  # GPIO pin 26 to the LPWM on the BTS7960
+
+
+    # For enabling "Left" and "Right" movement MOTOR 1
+    mL_L_EN = 25;  # connect GPIO pin 20 to L_EN on the BTS7960
+    mL_R_EN = 12;  # connect GPIO pin 21 to R_EN on the BTS7960
+
+    # For enabling "Left" and "Right" movement MOTOR 2
+    mR_L_EN = 23;  # connect GPIO pin 20 to L_EN on the BTS7960
+    mR_R_EN = 24;  # connect GPIO pin 21 to R_EN on the BTS7960
+
+
+    # Set all of our PINS to output MOTOR1
+    GPIO.setup(mL_RPWM, GPIO.OUT)
+    GPIO.setup(mL_LPWM, GPIO.OUT)
+    GPIO.setup(mL_L_EN, GPIO.OUT)
+    GPIO.setup(mL_R_EN, GPIO.OUT)
+
+
+    # Enable "Left" and "Right" movement on the HBRidge MOTOR 1
+    GPIO.output(mL_R_EN, True)
+    GPIO.output(mL_L_EN, True)
+
+
+    mL_rpwm= GPIO.PWM(mL_RPWM, 100)
+    mL_lpwm= GPIO.PWM(mL_LPWM, 100)
+
+    # Set all of our PINS to output MOTOR2
+    GPIO.setup(mR_RPWM, GPIO.OUT)
+    GPIO.setup(mR_LPWM, GPIO.OUT)
+    GPIO.setup(mR_L_EN, GPIO.OUT)
+    GPIO.setup(mR_R_EN, GPIO.OUT)
+
+
+    # Enable "Left" and "Right" movement on the HBRidge MOTRO2
+    GPIO.output(mR_R_EN, True)
+    GPIO.output(mR_L_EN, True)
+
+
+    mR_rpwm= GPIO.PWM(mR_RPWM, 100)
+    mR_lpwm= GPIO.PWM(mR_LPWM, 100)
+
+    mR_rpwm.ChangeDutyCycle(50)
+    mL_rpwm.ChangeDutyCycle(50)
+
+    mL_rpwm.start(0)
+    mR_rpwm.start(0)
+
+
+
+
+
+
+def control_relay():
+    import RPi.GPIO as GPIO
+    import time
+
+    # Set the GPIO mode
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setwarnings(False)
+
+    # Define the GPIO pin connected to the relay
+    RELAY_PIN = 17
+
+    GPIO.setup(RELAY_PIN, GPIO.OUT)
+    GPIO.output(RELAY_PIN, GPIO.HIGH)
+
+    print("Relay turned on")
+    time.sleep(5)
+
+        
+    GPIO.output(RELAY_PIN, GPIO.LOW)
+    GPIO.cleanup(17)
+
+
+
+
+while True:
+
+    import cv2
+    import numpy as np
+    import time
+    from picamera import PiCamera
+
+    # Load YOLO
+    net = cv2.dnn.readNet(r"/home/danish/Desktop/weights/crop_weed_detection.weights", r"/home/danish/Desktop/cfg/crop_weed.cfg")
+    classes = []
+    with open(r"/home/danish/Desktop/names/obj.names", "r") as f:
+        classes = [line.strip() for line in f.readlines()]
+    layer_names = net.getLayerNames()
+    output_layers = [layer_names[i[0] - 1] for i in net.getUnconnectedOutLayers()]
+    colors = np.random.uniform(0, 255, size=(len(classes), 3))
+
+    # Initialize Pi Camera
+    camera = PiCamera()
+    camera.resolution = (640, 480)  # Set desired resolution
+
+    # Allow camera to warm up
+    time.sleep(2)
+
+    font = cv2.FONT_HERSHEY_PLAIN
+    starting_time = time.time()
+    frame_id = 0
+
+    while True:
+        # Capture frame from Pi Camera
+        frame = np.empty((camera.resolution[1], camera.resolution[0], 3), dtype=np.uint8)
+        camera.capture(frame, 'bgr')
+
+        frame_id += 1
+        height, width, channels = frame.shape
+
+        # Detect objects
+        blob = cv2.dnn.blobFromImage(frame, 0.00392, (416, 416), (0, 0, 0), True, crop=False)
+        net.setInput(blob)
+        outs = net.forward(output_layers)
+
+        # Process detections
+        class_ids = []
+        confidences = []
+        boxes = []
+
+        for out in outs:
+            for detection in out:
+                scores = detection[5:]
+                class_id = np.argmax(scores)
+                confidence = scores[class_id]
+
+                if confidence > 0.2:
+                    center_x = int(detection[0] * width)
+                    center_y = int(detection[1] * height)
+                    w = int(detection[2] * width)
+                    h = int(detection[3] * height)
+
+                    x = int(center_x - w / 2)
+                    y = int(center_y - h / 2)
+
+                    boxes.append([x, y, w, h])
+                    confidences.append(float(confidence))
+                    class_ids.append(class_id)
+
+        # Apply non-maximum suppression
+        indexes = cv2.dnn.NMSBoxes(boxes, confidences, 0.4, 0.3)
+
+        # Draw bounding boxes and labels
+        for i in range(len(boxes)):
+            if i in indexes:
+                x, y, w, h = boxes[i]
+                label = str(classes[class_ids[i]])
+                confidence = confidences[i]
+                color = colors[class_ids[i]]
+
+                cv2.rectangle(frame, (x, y), (x + w, y + h), color, 2)
+                cv2.putText(frame, label + " " + str(round(confidence, 2)), (x, y + 30), font, 2, color, 2)
+
+        # Calculate FPS and display on frame
+        elapsed_time = time.time() - starting_time
+        fps = frame_id / elapsed_time
+        cv2.putText(frame, "FPS: " + str(round(fps, 2)), (10, 50), font, 2, (0, 0, 0), 3)
+
+        # Display frame
+        cv2.imshow("Object Detection", frame)
+
+        # Check for key press
+        key = cv2.waitKey(1)
+        if key == 27:  # Esc key
+            break
+
+    # Release Pi Camera and close windows
+    camera.close()
+    cv2.destroyAllWindows()
+    x=label
+    FORWARD()
+    if x == "weed":
+        STOP()
+        control_relay()
